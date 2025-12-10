@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import { existsSync } from 'fs'
 
 class ProductManager {
     constructor (path) {
@@ -7,7 +8,7 @@ class ProductManager {
     
     async readFile() {
         try {
-            if (fs.existsSync(this.path)) {
+            if (existsSync(this.path)) {
                 const products = await fs.readFile(this.path, 'utf-8');
                 return JSON.parse(products);
             }
@@ -31,7 +32,7 @@ class ProductManager {
     }
     async getProductById(id) {
         const products = await this.readFile();
-        return products.find (product => product.id === id);
+        return products.find (product => product.id === parseInt(id));
     }
 
     async addProduct(product) {
@@ -45,7 +46,7 @@ class ProductManager {
 
     async updateProduct(id, update) {
         const products = await this.readFile();
-        const index = products.findIndex (product => product.id === id);
+        const index = products.findIndex (product => product.id === parseInt(id));
         if (index === -1) return null;
         update.id = products[index].id,
         products[index] = { ...products[index], ...update };
@@ -54,7 +55,7 @@ class ProductManager {
     }
     async deleteProduct(id) {
         const products = await this.readFile();
-        const filteredProducts = products.filter (product => product.id !== id);
+        const filteredProducts = products.filter (product => product.id !== parseInt(id));
         if (products.length === filteredProducts.length) return false;
         await this.writeFile (filteredProducts);
         return filteredProducts;

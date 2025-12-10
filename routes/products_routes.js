@@ -1,21 +1,28 @@
 import { Router } from "express";
 import ProductManager from "../dao/ProductManager.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = Router();
-const productManager = new ProductManager();
+const productManager = new ProductManager(
+    path.join(__dirname, '..', 'data', 'products.json')
+);
 
-router.get('/api/products', (req, res) => {
-  const products = productManager.getProducts();
+router.get('/', async (req, res) => {
+  const products = await productManager.getProducts();
   res.json(products);
 })
 
-router.get('/api/products/:pid', async (req, res) => {
-    const product = await productManager.getProductById(req.params.pid);
+router.get('/:pid', async (req, res) => {
+    const product = await productManager.getProductById(parseInt(req.params.pid));
     if (!product) return res.status(404).json({ error: "El producto no fue encontrado" });
     res.json(product);
 });
 
-router.post('/api/products', async (req, res) => {
+router.post('/', async (req, res) => {
     const newProduct = await productManager.addProduct({ 
         title: req.body.title,
         description: req.body.description,
@@ -25,19 +32,27 @@ router.post('/api/products', async (req, res) => {
         stock: req.body.stock,
         category: req.body.category,
         thumbnails: req.body.thumbnails || []
-     });
+    });
+
+    const io = req.app.get('io');
+    io.emit('updatedProducts', await productManager.getProducts()); 
+
     res.status(201).json(newProduct);
 });
 
-router.put('/api/products/:pid', async (req, res) => {
+router.put('/:pid', async (req, res) => {
     const updatedProduct = await productManager.updateProduct(req.params.pid, req.body);
     if (!updatedProduct) return res.status(404).json({ error: "El producto no fue encontrado" });
     res.json(updatedProduct);
 });
 
-router.delete('/api/products/:pid', async (req, res) => {
+router.delete('/:pid', async (req, res) => {
     const result = await productManager.deleteProduct(req.params.pid);
     if (!result) return res.status(404).json({ error: "El producto no fue encontrado" });
+
+    const io = req.app.get('io');
+    io.emit('updatedProducts', await productManager.getProducts());
+
     res.json({ message: "Producto eliminado exitosamente", products: result });
 });
 

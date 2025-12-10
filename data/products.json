@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "title": "Laptop Dell XPS 13",
+    "description": "Laptop ultradelgada con procesador Intel i7",
+    "price": 1299.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "DELL-XPS-13",
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "title": "Mouse Logitech MX Master 3",
+    "description": "Mouse inalámbrico de precisión para productividad",
+    "price": 99.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "LOG-MX-3",
+    "stock": 50
+  },
+  {
+    "id": 3,
+    "title": "Teclado Mecánico Corsair K95",
+    "description": "Teclado mecánico RGB profesional",
+    "price": 199.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "CORSAIR-K95",
+    "stock": 25
+  },
+  {
+    "id": 4,
+    "title": "Monitor LG 27 4K",
+    "description": "Monitor UltraFine 27 pulgadas 4K con USB-C",
+    "price": 699.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "LG-4K-27",
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "title": "Auriculares Sony WH-1000XM5",
+    "description": "Auriculares inalámbricos con cancelación de ruido",
+    "price": 399.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "SONY-XM5",
+    "stock": 20
+  },
+  {
+    "id": 7,
+    "title": "SSD Samsung 990 Pro 2TB",
+    "description": "Almacenamiento NVMe de alta velocidad",
+    "price": 279.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "SAMSUNG-990-2TB",
+    "stock": 40
+  },
+  {
+    "id": 8,
+    "title": "Hub USB-C Anker",
+    "description": "Hub con 7 puertos para conexión múltiple",
+    "price": 49.99,
+    "thumbnail": "https://via.placeholder.com/150",
+    "code": "ANKER-HUB-USB",
+    "stock": 60
+  },
+  {
+    "id": 9,
+    "title": "Monitor LG 24 pulgadas",
+    "description": "IPS Full HD",
+    "code": "MON123",
+    "price": 120000,
+    "status": true,
+    "stock": 15,
+    "category": "Tecnología",
+    "thumbnails": [
+      "imagen1.jpg"
+    ]
+  }
+]
